@@ -1,6 +1,9 @@
 
 1. Keyword `volatile`:
 
+    `volatile` is needed if you are reading from a spot in memory that, say, a completely separate process/device/whatever may write to.
+    `volatile` is needed when developing embedded systems or device drivers, where you need to read or write a memory-mapped hardware device. The contents of a particular device register could change at any time, so you need the volatile keyword to ensure that such accesses aren't optimised away by the compiler.
+
     [https://stackoverflow.com/a/72617/3829845](https://stackoverflow.com/a/72617/3829845)
 
 2. Copy blocks of memory:
@@ -140,6 +143,7 @@
 10. Iterator invalidation rule:
 
     **Insertion**
+
     Sequence Containers
 
     * `vector`: The functions insert, emplace_back, emplace, push_back cause reallocation if the new size is greater than the old capacity. Reallocation invalidates all the references, pointers, and iterators referring to the elements in the sequence. If no reallocation happens, all the iterators and references before the insertion point remain valid. [26.3.11.5/1]
@@ -173,6 +177,7 @@
     * `priority_queue`: inherited from underlying container
 
     **Erasure**
+
     Sequence Containers
 
     * `vector`: The functions erase and pop_back invalidate iterators and references at or after the point of the erase. [26.3.11.5/3]
